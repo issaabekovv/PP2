@@ -1,12 +1,17 @@
 import psycopg2
 from config import params
 
-def connect():
-    """ Connect to the PostgreSQL database server """
-    conn = None
-    try:
-        conn = psycopg2.connect(**params)
-        return conn
-    except (Exception, psycopg2.DatabaseError) as error:
-        print(f"Error: {error}")
-        return None
+def get_connection():
+    return psycopg2.connect(**params)
+
+def create_tables():
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS contacts (
+                    id SERIAL PRIMARY KEY,
+                    name VARCHAR(100),
+                    phone VARCHAR(20) UNIQUE
+                )
+            """)
+        conn.commit()

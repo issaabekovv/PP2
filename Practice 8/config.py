@@ -1,8 +1,7 @@
-# Database connection parameters
+# config.py
 params = {
     "host": "localhost",
-    "database": "phonebook_db",
+    "database": "phonebook",  # имя базы, которую ты создал в pgAdmin
     "user": "postgres",
-    "password": "your_password",
-    "port": "5432"
+    "password": "apple13"
 }
